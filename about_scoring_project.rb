@@ -31,23 +31,19 @@ require File.expand_path(File.dirname(__FILE__) + '/neo')
 
 def score(dice)
   score = 0
-  count = {}
-  (1..6).each do |n|
-    count[n] = dice.select { |d| d == n }.count
-  end
 
-  ones_triplets = count[1] / 3
+  ones_triplets = dice.count(1) / 3
   score += ones_triplets * 1000
 
   (2..6).each do |n|
-    ns_triplets = count[n] / 3
+    ns_triplets = dice.count(n) / 3
     score += ns_triplets * 100 * n
   end
 
-  onces_singles = count[1] % 3
-  score += onces_singles * 100
+  ones_singles = dice.count(1) % 3
+  score += ones_singles * 100
 
-  fives_singles = count[5] % 3
+  fives_singles = dice.count(5) % 3
   score += fives_singles * 50
 
   score
