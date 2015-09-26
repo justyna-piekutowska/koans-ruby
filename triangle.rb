@@ -14,6 +14,9 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
+  unless (a - b).abs < c && c < a + b
+    raise TriangleError
+  end
   if a == b && a == c
     :equilateral
   elsif a == b || a == c || c == b
